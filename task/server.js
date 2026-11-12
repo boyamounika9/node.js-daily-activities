@@ -5,7 +5,7 @@ const server=http.createServer((req,res)=>{
         res.write("Welcome to server")
         res.end()
     }
-    if(req.method=="GET" && req.url==="/allusers"){
+    else if(req.method=="GET" && req.url==="/allusers"){
 
         let usersdata=fs.readFileSync("./users.json","utf8")
         let data=JSON.parse(usersdata)
@@ -14,7 +14,7 @@ const server=http.createServer((req,res)=>{
         res.end()
     }
 
-     if(req.method=="GET" && req.url==="/products"){
+    else if(req.method=="GET" && req.url==="/products"){
 
         let productsdata=fs.readFileSync("./products.json","utf8")
         let data=JSON.parse(productsdata)
@@ -23,7 +23,7 @@ const server=http.createServer((req,res)=>{
         res.end()
     }
 
-     if(req.method=="GET" && req.url==="/products/product"){
+    else if(req.method=="GET" && req.url==="/products/product"){
 
         let productsdata=fs.readFileSync("./products.json","utf8")
         let data=JSON.parse(productsdata)
@@ -33,6 +33,26 @@ const server=http.createServer((req,res)=>{
        res.write(JSON.stringify(product,null,2));
         res.end()
     }
+
+   else if (req.method == "POST" && req.url == "/adduser") {
+
+    let body = "";
+
+    req.on("data", (chunk) => {
+        body += chunk.toString();
+    });
+
+    req.on("end", () => {
+
+        let data = JSON.parse(body);
+
+        console.log(data);
+
+        res.write("User added successfully");
+        res.end();
+
+    });
+}
 
 })
 

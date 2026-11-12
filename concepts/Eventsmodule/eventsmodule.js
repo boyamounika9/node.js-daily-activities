@@ -2,8 +2,10 @@ const event=require("events")
 
 const ev=new event()
 
-ev.on("greet",()=>{
-    console.log("hello everyone")
-})
+ev.on("greet",(data)=>{
+    console.log("hello "+ data)
+}) 
 
-ev.emit("greet")
+ev.emit("greet","mounika")
+
+
