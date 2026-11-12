@@ -32043,3 +32043,127 @@ req.on("end", () => {
 
     res.end("Data received successfully");
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// else if (req.method == "POST" && req.url == "/adduser") {
+
+    //     let body = "";
+
+    //     req.on("data", (chunk) => {
+    //         body += chunk.toString();
+    //     });
+
+    //     req.on("end", () => {
+
+    //         try {
+    //             let newuser = JSON.parse(body);
+
+    //             const allusersdata = JSON.parse(fs.readFileSync("./users.json", "utf8"))
+
+    //             allusersdata.push(newuser)
+
+    //             fs.writeFileSync("./users.json", JSON.stringify(allusersdata, null, 2))
+
+    //         }
+    //         catch (error) {
+
+    //             res.write("error is there")
+    //             res.end()
+    //         }
+
+    //     });
+
+    //     res.write("user added successfully")
+    //     res.end()
+    // }
+
+
+//update
+
+// else if (req.method == "POST" && req.url == "/edituser") {
+
+//     let body = "";
+
+//     req.on("data", (chunk) => {
+//         body += chunk.toString();
+//     });
+
+//     req.on("end", () => {
+
+//         try {
+//             let newuser = JSON.parse(body);
+
+//             const allusersdata = JSON.parse(fs.readFileSync("./users.json", "utf8"));
+
+//             let olduser = allusersdata.find(ele => ele.id === newuser.id);
+
+//             if (olduser) {
+//                 allusersdata.splice(allusersdata.indexOf(olduser), 1, newuser);
+//             }
+
+//             fs.writeFileSync("./users.json", JSON.stringify(allusersdata, null, 2));
+
+//             res.write("User edited successfully");
+//             res.end();
+
+//         }
+//         catch (error) {
+//             res.write("Error is there");
+//             res.end();
+//         }
+
+//     });
+// }
+
+//Delete
+
+else if (req.method == "POST" && req.url == "/deleteuser") {
+
+    let body = "";
+
+    req.on("data", (chunk) => {
+        body += chunk.toString();
+    });
+
+    req.on("end", () => {
+
+        try {
+            let user = JSON.parse(body);
+
+            const allusersdata = JSON.parse(fs.readFileSync("./users.json", "utf8"));
+
+            let newusers = allusersdata.filter(ele => ele.id !== user.id);
+
+    
+            fs.writeFileSync("./users.json", JSON.stringify(newusers, null, 2));
+
+            res.write("User deleted successfully");
+            res.end();
+
+        }
+        catch (error) {
+            res.write("Error is there");
+            res.end();
+        }
+
+    });
+}
+
+
