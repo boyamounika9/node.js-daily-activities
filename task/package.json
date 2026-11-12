@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "filemanager": "node filemanager.js"
+    "filemanager": "node filemanager.js",
+    "server":" node server.js"
   },
   "keywords": [],
   "author": "",
